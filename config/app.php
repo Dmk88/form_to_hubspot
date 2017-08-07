@@ -176,7 +176,12 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
+        
+        /*
+         * Google Sheets API v4 for Laravel
+         */
+        PulkitJalan\Google\GoogleServiceProvider::class,
+        GoogleSheets\Providers\SheetsServiceProvider::class,
     ],
 
     /*
@@ -225,6 +230,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'Google' => PulkitJalan\Google\Facades\Google::class,
+        'Sheets' => GoogleSheets\Facades\Sheets::class,
 
     ],
 
