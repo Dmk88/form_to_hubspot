@@ -182,6 +182,11 @@ return [
          */
         PulkitJalan\Google\GoogleServiceProvider::class,
         GoogleSheets\Providers\SheetsServiceProvider::class,
+
+        /*
+         * Laravel Debugbar
+         */
+        Barryvdh\Debugbar\ServiceProvider::class,
     ],
 
     /*
@@ -232,6 +237,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Google' => PulkitJalan\Google\Facades\Google::class,
         'Sheets' => GoogleSheets\Facades\Sheets::class,
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
 
     ],
 

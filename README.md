@@ -6,3 +6,5 @@ Form`s data from csv format google docs uploads to hubspot form
  composer install
 
 Run php artisan vendor:publish --provider="PulkitJalan\Google\GoogleServiceProvider" --tag="config" to publish the google config file
+
+php artisan vendor:publish --provider="Barryvdh\Debugbar\ServiceProvider"
