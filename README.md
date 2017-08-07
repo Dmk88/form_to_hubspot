@@ -11,3 +11,5 @@ php artisan vendor:publish --provider="Barryvdh\Debugbar\ServiceProvider"
 
 Automatic phpDoc generation for Laravel Facades: 
 php artisan ide-helper:generate
+
+php artisan migrate
