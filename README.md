@@ -8,3 +8,6 @@ Form`s data from csv format google docs uploads to hubspot form
 Run php artisan vendor:publish --provider="PulkitJalan\Google\GoogleServiceProvider" --tag="config" to publish the google config file
 
 php artisan vendor:publish --provider="Barryvdh\Debugbar\ServiceProvider"
+
+Automatic phpDoc generation for Laravel Facades: 
+php artisan ide-helper:generate
