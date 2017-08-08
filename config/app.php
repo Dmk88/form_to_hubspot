@@ -176,18 +176,24 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        
+
+        // prod
         /*
          * Google Sheets API v4 for Laravel
          */
-        PulkitJalan\Google\GoogleServiceProvider::class,
-        GoogleSheets\Providers\SheetsServiceProvider::class,
-
+        // PulkitJalan\Google\GoogleServiceProvider::class,
+        // GoogleSheets\Providers\SheetsServiceProvider::class,
+        /*
+         * Laravel 5 Admin SleepingOwl Module
+         */
+        SleepingOwl\Admin\Providers\SleepingOwlServiceProvider::class,
+        
+        // dev
         /*
          * Laravel Debugbar
          */
         Barryvdh\Debugbar\ServiceProvider::class,
-
+        
         /*
          * Laravel 5 IDE Helper Generator
          */
@@ -240,10 +246,21 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'Google' => PulkitJalan\Google\Facades\Google::class,
-        'Sheets' => GoogleSheets\Facades\Sheets::class,
+        
+        // 'Google' => PulkitJalan\Google\Facades\Google::class,
+        // 'Sheets' => GoogleSheets\Facades\Sheets::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
-
+        
+        // 'Admin'                => 'SleepingOwl\Admin\Admin',
+        // 'AdminAuth'            => 'SleepingOwl\AdminAuth\Facades\AdminAuth',
+        // 'AdminRouter'          => 'SleepingOwl\Admin\Facades\AdminRouter',
+        // 'AssetManager'         => 'SleepingOwl\Admin\AssetManager\AssetManager',
+        // 'Column'               => 'SleepingOwl\Admin\Columns\Column',
+        // 'FormItem'             => 'SleepingOwl\Admin\Models\Form\FormItem',
+        // 'ModelItem'            => 'SleepingOwl\Admin\Models\ModelItem',
+        //
+        // 'Form'      => 'Illuminate\Html\FormFacade',
+        // 'Html'      => 'Illuminate\Html\HtmlFacade',
     ],
 
 ];
