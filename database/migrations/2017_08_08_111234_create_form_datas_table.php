@@ -23,6 +23,7 @@ class CreateFormDatasTable extends Migration
             $table->string('product_file', 100);
             $table->string('file_type', 50);
             $table->string('release', 50);
+            $table->string('google_doc_id');
             $table->timestamps();
         });
     }

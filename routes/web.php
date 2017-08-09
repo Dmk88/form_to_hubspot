@@ -19,4 +19,4 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/form_data_from_csv', 'GrabCsvController@index')->name('form_to_hubspot');
+Route::get('/form_data_from_csv/{id}', 'GrabCsvController@index')->name('form_to_hubspot');

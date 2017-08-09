@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1f76e7751fff3c6bae4761d7f0545c8d",
-    "content-hash": "51509b006563870de61d9f7fb527e9f4",
+    "hash": "4fd9196e04d32912fc35e838cff287ff",
+    "content-hash": "4389134f4e2b96be73e7830a3bfeffea",
     "packages": [
         {
             "name": "barryvdh/laravel-debugbar",
@@ -1614,12 +1614,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/LaravelRUS/SleepingOwlAdmin.git",
-                "reference": "e548b823866dce0d86b7ccf9387658892adb7905"
+                "reference": "d5767d29c82c5272efbbd60e10ac5f31a9fac92b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/LaravelRUS/SleepingOwlAdmin/zipball/e548b823866dce0d86b7ccf9387658892adb7905",
-                "reference": "e548b823866dce0d86b7ccf9387658892adb7905",
+                "url": "https://api.github.com/repos/LaravelRUS/SleepingOwlAdmin/zipball/d5767d29c82c5272efbbd60e10ac5f31a9fac92b",
+                "reference": "d5767d29c82c5272efbbd60e10ac5f31a9fac92b",
                 "shasum": ""
             },
             "require": {
@@ -1674,7 +1674,7 @@
                 "laravel",
                 "panel"
             ],
-            "time": "2017-08-08 10:46:34"
+            "time": "2017-08-09 14:15:55"
         },
         {
             "name": "league/flysystem",
@@ -2483,6 +2483,91 @@
                 "uuid"
             ],
             "time": "2017-08-04 13:39:04"
+        },
+        {
+            "name": "rossjcooper/laravel-hubspot",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rossjcooper/laravel-hubspot.git",
+                "reference": "eb9928ae261ad5fd02083976bd013f55789448ea"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rossjcooper/laravel-hubspot/zipball/eb9928ae261ad5fd02083976bd013f55789448ea",
+                "reference": "eb9928ae261ad5fd02083976bd013f55789448ea",
+                "shasum": ""
+            },
+            "require": {
+                "ryanwinchester/hubspot-php": "1.0.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Rossjcooper\\LaravelHubSpot\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ross Cooper",
+                    "email": "therossjcooper@gmail.com"
+                }
+            ],
+            "time": "2017-05-06 22:54:15"
+        },
+        {
+            "name": "ryanwinchester/hubspot-php",
+            "version": "v1.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ryanwinchester/hubspot-php.git",
+                "reference": "f620bac70bde7143d55823ad93ddf6aebc36dff4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ryanwinchester/hubspot-php/zipball/f620bac70bde7143d55823ad93ddf6aebc36dff4",
+                "reference": "f620bac70bde7143d55823ad93ddf6aebc36dff4",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "~6.0",
+                "php": ">=5.5.0"
+            },
+            "require-dev": {
+                "codeclimate/php-test-reporter": " dev-master@dev",
+                "phpspec/phpspec": "~2.0",
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "SevenShores\\Hubspot\\": "src/"
+                },
+                "files": [
+                    "src/helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Ryan Winchester",
+                    "email": "fungku@gmail.com",
+                    "homepage": "http://ryanwinchester.ca"
+                }
+            ],
+            "description": "HubSpot PHP API client",
+            "keywords": [
+                "api",
+                "hubspot"
+            ],
+            "time": "2017-05-16 16:51:53"
         },
         {
             "name": "swiftmailer/swiftmailer",
