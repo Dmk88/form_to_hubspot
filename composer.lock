@@ -4,9 +4,103 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4fd9196e04d32912fc35e838cff287ff",
-    "content-hash": "4389134f4e2b96be73e7830a3bfeffea",
+    "hash": "714ef0c263fbb335cbc6a8731af7f302",
+    "content-hash": "06a3a4ef5dff8a9a0a114afd68c3b8fe",
     "packages": [
+        {
+            "name": "adldap2/adldap2",
+            "version": "v7.0.15",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Adldap2/Adldap2.git",
+                "reference": "d40f983d58dbecd516856786474893c5fb4b7297"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Adldap2/Adldap2/zipball/d40f983d58dbecd516856786474893c5fb4b7297",
+                "reference": "d40f983d58dbecd516856786474893c5fb4b7297",
+                "shasum": ""
+            },
+            "require": {
+                "ext-ldap": "*",
+                "illuminate/support": "~5.0",
+                "php": ">=5.5.9"
+            },
+            "require-dev": {
+                "mockery/mockery": "~0.9",
+                "phpunit/phpunit": "~4.8|~5.6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Adldap\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Steve Bauman",
+                    "email": "steven_bauman@outlook.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A PHP LDAP Package for Active Directory Manipulation.",
+            "keywords": [
+                "active directory",
+                "ad",
+                "adLDAP",
+                "adldap2",
+                "directory",
+                "ldap",
+                "windows"
+            ],
+            "time": "2017-05-16 13:46:45"
+        },
+        {
+            "name": "adldap2/adldap2-laravel",
+            "version": "v3.0.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Adldap2/Adldap2-Laravel.git",
+                "reference": "a360038964d3583ae6ea54d56179f882c12ee787"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Adldap2/Adldap2-Laravel/zipball/a360038964d3583ae6ea54d56179f882c12ee787",
+                "reference": "a360038964d3583ae6ea54d56179f882c12ee787",
+                "shasum": ""
+            },
+            "require": {
+                "adldap2/adldap2": "7.0.*",
+                "php": ">=5.6"
+            },
+            "require-dev": {
+                "mockery/mockery": "0.9.*",
+                "orchestra/testbench": "~3.2",
+                "phpunit/phpunit": "~5.6"
+            },
+            "type": "project",
+            "autoload": {
+                "psr-4": {
+                    "Adldap\\Laravel\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "LDAP Authentication & Management for Laravel.",
+            "keywords": [
+                "adLDAP",
+                "adldap2",
+                "laravel",
+                "ldap"
+            ],
+            "time": "2017-07-18 21:33:53"
+        },
         {
             "name": "barryvdh/laravel-debugbar",
             "version": "v2.4.3",
@@ -610,33 +704,33 @@
         },
         {
             "name": "doctrine/inflector",
-            "version": "v1.1.0",
+            "version": "v1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/inflector.git",
-                "reference": "90b2128806bfde671b6952ab8bea493942c1fdae"
+                "reference": "e11d84c6e018beedd929cff5220969a3c6d1d462"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/inflector/zipball/90b2128806bfde671b6952ab8bea493942c1fdae",
-                "reference": "90b2128806bfde671b6952ab8bea493942c1fdae",
+                "url": "https://api.github.com/repos/doctrine/inflector/zipball/e11d84c6e018beedd929cff5220969a3c6d1d462",
+                "reference": "e11d84c6e018beedd929cff5220969a3c6d1d462",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.2"
+                "php": "^7.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "4.*"
+                "phpunit/phpunit": "^6.2"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.1.x-dev"
+                    "dev-master": "1.2.x-dev"
                 }
             },
             "autoload": {
-                "psr-0": {
-                    "Doctrine\\Common\\Inflector\\": "lib/"
+                "psr-4": {
+                    "Doctrine\\Common\\Inflector\\": "lib/Doctrine/Common/Inflector"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -673,7 +767,7 @@
                 "singularize",
                 "string"
             ],
-            "time": "2015-11-06 14:35:42"
+            "time": "2017-07-22 12:18:28"
         },
         {
             "name": "doctrine/lexer",
@@ -878,16 +972,16 @@
         },
         {
             "name": "google/apiclient-services",
-            "version": "v0.18",
+            "version": "v0.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/google/google-api-php-client-services.git",
-                "reference": "018f3288dc686345bd6d82deea81b6f56171bfc0"
+                "reference": "430b7125af4f76f38f786222117a9ac1436e0e28"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/google/google-api-php-client-services/zipball/018f3288dc686345bd6d82deea81b6f56171bfc0",
-                "reference": "018f3288dc686345bd6d82deea81b6f56171bfc0",
+                "url": "https://api.github.com/repos/google/google-api-php-client-services/zipball/430b7125af4f76f38f786222117a9ac1436e0e28",
+                "reference": "430b7125af4f76f38f786222117a9ac1436e0e28",
                 "shasum": ""
             },
             "require": {
@@ -911,7 +1005,7 @@
             "keywords": [
                 "google"
             ],
-            "time": "2017-08-06 00:19:44"
+            "time": "2017-08-13 00:18:21"
         },
         {
             "name": "google/auth",
@@ -1364,20 +1458,20 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v5.4.32",
+            "version": "v5.4.33",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "b8300578d159199b1195413b67318c79068cd24d"
+                "reference": "e53a81a2bf406f501cdf818ad949f8d6c8dabfc0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/b8300578d159199b1195413b67318c79068cd24d",
-                "reference": "b8300578d159199b1195413b67318c79068cd24d",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/e53a81a2bf406f501cdf818ad949f8d6c8dabfc0",
+                "reference": "e53a81a2bf406f501cdf818ad949f8d6c8dabfc0",
                 "shasum": ""
             },
             "require": {
-                "doctrine/inflector": "~1.1.0",
+                "doctrine/inflector": "~1.1",
                 "erusev/parsedown": "~1.6",
                 "ext-mbstring": "*",
                 "ext-openssl": "*",
@@ -1489,7 +1583,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2017-08-03 12:59:42"
+            "time": "2017-08-14 20:17:41"
         },
         {
             "name": "laravel/tinker",
@@ -1614,12 +1708,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/LaravelRUS/SleepingOwlAdmin.git",
-                "reference": "d5767d29c82c5272efbbd60e10ac5f31a9fac92b"
+                "reference": "4463c620045f1e7a3066fdda36ed600283a4b00c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/LaravelRUS/SleepingOwlAdmin/zipball/d5767d29c82c5272efbbd60e10ac5f31a9fac92b",
-                "reference": "d5767d29c82c5272efbbd60e10ac5f31a9fac92b",
+                "url": "https://api.github.com/repos/LaravelRUS/SleepingOwlAdmin/zipball/4463c620045f1e7a3066fdda36ed600283a4b00c",
+                "reference": "4463c620045f1e7a3066fdda36ed600283a4b00c",
                 "shasum": ""
             },
             "require": {
@@ -1674,7 +1768,7 @@
                 "laravel",
                 "panel"
             ],
-            "time": "2017-08-09 14:15:55"
+            "time": "2017-08-11 16:52:13"
         },
         {
             "name": "league/flysystem",

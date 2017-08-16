@@ -17,4 +17,9 @@ class FormData extends Model
         'release',
         'google_doc_id',
     ];
+    
+    public function google_doc()
+    {
+        return $this->belongsTo(GoogleDoc::class);
+    }
 }

@@ -12,7 +12,7 @@ return [
     | any other location as required by the application or its packages.
     */
     
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'Form To Hubspot'),
     
     /*
     |--------------------------------------------------------------------------
@@ -203,6 +203,12 @@ return [
          * Laravel 5 IDE Helper Generator
          */
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+        
+        /*
+         * LDAP
+         */
+        Adldap\Laravel\AdldapServiceProvider::class,
+        Adldap\Laravel\AdldapAuthServiceProvider::class,
     ],
     
     /*
@@ -256,6 +262,7 @@ return [
         // 'Sheets' => GoogleSheets\Facades\Sheets::class,
         'Debugbar'     => Barryvdh\Debugbar\Facade::class,
         'HubSpot'      => Rossjcooper\LaravelHubSpot\Facades\HubSpot::class,
+        'Adldap' => Adldap\Laravel\Facades\Adldap::class,
         // 'Admin'                => 'SleepingOwl\Admin\Admin',
         // 'AdminAuth'            => 'SleepingOwl\AdminAuth\Facades\AdminAuth',
         // 'AdminRouter'          => 'SleepingOwl\Admin\Facades\AdminRouter',
