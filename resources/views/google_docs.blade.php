@@ -25,12 +25,29 @@
                     <td>
                         {{ $google_doc->hubspot_form->id }}
                     </td>
-                    <td><button type="button" class="btn btn-success">View</button></td>
-                    <td><button type="button" class="btn btn-primary">Edit</button></td>
-                    <td><button type="button" class="btn btn-danger">Delete</button></td>
+                    <td>
+                        <form action="{{ url('google_doc/'. $google_doc->id) }}">
+                            <button type="submit" class="btn btn-success">View</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="{{ url('google_doc/'. $google_doc->id . '/edit/') }}">
+                            <button type="submit" class="btn btn-primary">Edit</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="{{ url('google_doc/'. $google_doc->id) }}" method="post">
+                            {{ csrf_field() }}
+                            {{ method_field('DELETE') }}
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
                 </tr>
             @endforeach
             </tbody>
         </table>
+        <form action="{{ url('google_doc') }}" method="get">
+            <button type="submit" class="btn btn-default">Add</button>
+        </form>
     </div>
 @endsection

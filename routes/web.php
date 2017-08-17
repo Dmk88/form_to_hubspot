@@ -51,7 +51,16 @@ Route::get('/', function () {
 // });
 
 Route::get('/google_docs', 'GoogleDocController@index')->name('google_docs');
-Route::post('/google_doc', 'GoogleDocController@store');
-Route::delete('/google_doc/{id}', 'GoogleDocController@destroy');
+
+Route::get('/google_doc/{id}', 'GoogleDocController@show');
+Route::get('/google_doc/{id}/edit', 'GoogleDocController@show_for_edit');
+
+Route::post('/google_doc/{id}', 'GoogleDocController@edit');
+
+Route::post('/google_doc', 'GoogleDocController@add');
+Route::get('/google_doc', 'GoogleDocController@show_add_form');
+
+Route::delete('/google_doc/{id}', 'GoogleDocController@delete');
+
 
 Route::get('/form_data_from_csv/{id}', 'GrabCsvController@index')->name('form_to_hubspot');
