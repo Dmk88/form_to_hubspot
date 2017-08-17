@@ -31,6 +31,12 @@
                     <a class="navbar-brand" href="{{ url('/') }}">
                         {{ config('app.name', 'Form To Hubspot') }}
                     </a>
+                    <a class="navbar-brand" href="{{ url('/google_docs') }}">
+                        Google Docs
+                    </a>
+                    <a class="navbar-brand" href="{{ url('/hubspot_forms') }}">
+                        Hubspot Forms
+                    </a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">

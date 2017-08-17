@@ -12,6 +12,8 @@
                 <th>&nbsp;</th>
                 <th>&nbsp;</th>
                 <th>&nbsp;</th>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
             </thead>
             <tbody>
             @foreach ($google_docs as $google_doc)
@@ -44,6 +46,12 @@
                             {{ method_field('DELETE') }}
                             <button type="submit" class="btn btn-danger">Delete</button>
                         </form>
+                    </td>
+                    <td>
+                        <button type="submit" class="btn btn-default">Grab</button>
+                    </td>
+                    <td>
+                        <button type="submit" class="btn btn-default">Push to HS</button>
                     </td>
                 </tr>
             @endforeach
