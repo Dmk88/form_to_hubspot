@@ -2,9 +2,7 @@
 
 @section('content')
     <div class="container">
-        <div class="center-block">
-            <h3>Add new Google Doc</h3>
-        </div>
+        <h2>Add new Google Doc</h2>
         <div class="panel-body">
             @include('common.errors')
             <form action="{{ url('google_doc') }}" method="POST" class="form-horizontal">

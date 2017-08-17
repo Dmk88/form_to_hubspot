@@ -18,7 +18,13 @@
                 </div>
                 <div class="form-group">
                     <label class="col-sm-3 control-label">Hubspot Form</label>
-                    <div class="col-sm-6">{{ $google_doc->hubspot_form->form_name }}</div>
+                    <div class="col-sm-6">
+                        @if($google_doc->hubspot_form)
+                            {{ $google_doc->hubspot_form->form_name }}
+                        @else
+                            -
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>
