@@ -36,7 +36,7 @@ Route::get('/', function () {
     return redirect('/google_docs');
 });
 
-Route::get('/google_docs', 'GoogleDocController@index')->name('google_docs');
+// Route::get('/google_docs', 'GoogleDocController@index')->name('google_docs');
 Route::get('/google_doc/{id}', 'GoogleDocController@show');
 Route::get('/google_doc/{id}/edit', 'GoogleDocController@show_for_edit');
 Route::post('/google_doc/{id}', 'GoogleDocController@edit');
@@ -54,3 +54,12 @@ Route::delete('/hubspot_form/{id}', 'HubspotFormController@delete');
 
 
 Route::get('/form_data_from_csv/{id}', 'GrabCsvController@index')->name('form_to_hubspot');
+
+Route::get('/google_docs',['uses'=>'GoogleDocController@index', 'as' => 'datatables']);
+
+// Route::post('/datatables', 'DatatablesController', [
+//     'anyData'  => 'datatables.data',
+//     'getIndex' => 'datatables',
+// ]);
+// Route::get('/datatables', 'DatatablesController@anyData')->name('datatables.data');
+// Route::get('/datatables', 'DatatablesController@getIndex')->name('datatables');

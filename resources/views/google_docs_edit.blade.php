@@ -36,6 +36,14 @@
                 </div>
             </div>
             <div class="form-group">
+                <label for="doc_range" class="col-sm-3 control-label">Range</label>
+
+                <div class="col-sm-6">
+                    <input type="text" name="doc_range" id="doc_range" class="form-control"
+                           value="{{ $google_doc->doc_range }}">
+                </div>
+            </div>
+            <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-6">
                     <button type="submit" class="btn btn-default">
                         <i class="fa fa-plus"></i> Save

@@ -193,6 +193,11 @@ return [
          */
         Rossjcooper\LaravelHubSpot\HubSpotServiceProvider::class,
         
+        /*
+         * Laravel Datatables
+         */
+        Yajra\Datatables\DatatablesServiceProvider::class,
+        
         // dev
         /*
          * Laravel Debugbar
@@ -263,6 +268,7 @@ return [
         'Debugbar'     => Barryvdh\Debugbar\Facade::class,
         'HubSpot'      => Rossjcooper\LaravelHubSpot\Facades\HubSpot::class,
         'Adldap' => Adldap\Laravel\Facades\Adldap::class,
+        'Datatables' => Yajra\Datatables\Facades\Datatables::class,
         // 'Admin'                => 'SleepingOwl\Admin\Admin',
         // 'AdminAuth'            => 'SleepingOwl\AdminAuth\Facades\AdminAuth',
         // 'AdminRouter'          => 'SleepingOwl\Admin\Facades\AdminRouter',

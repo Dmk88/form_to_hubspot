@@ -102,7 +102,9 @@ class GrabCsvController extends Controller
         $deny_organizations      = ['altoros', 'avarteq', 'ecs'];
         
         foreach ($response->values as $form_data) {
-            if ((strtolower($form_data[9]) !== 'software') || (in_array(strtolower($form_data[3]), $deny_organizations))) {
+            if ((strtolower($form_data[9]) !== 'software') || (in_array(strtolower($form_data[3]),
+                    $deny_organizations))
+            ) {
                 continue;
             }
             $form        = [
@@ -113,6 +115,7 @@ class GrabCsvController extends Controller
                 'product_file' => $form_data[7],
                 'file_type'    => $form_data[9],
                 'release'      => $form_data[10],
+                'hs_persona'   => 'persona_8',
             ];
             $hubspot_req = HubSpot::forms()->submit($portal_id, $google_doc_to_form_guid[$id], $form);
             

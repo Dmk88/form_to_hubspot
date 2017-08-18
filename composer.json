@@ -13,7 +13,8 @@
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "^5.4.0",
         "laravelrus/sleepingowl": "4.*@dev",
-        "rossjcooper/laravel-hubspot": "^1.0"
+        "rossjcooper/laravel-hubspot": "^1.0",
+        "yajra/laravel-datatables-oracle": "^7.9"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.4",

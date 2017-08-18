@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@push('stylesheet')
+<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.15/css/jquery.dataTables.css">
+@endpush
+
 @section('content')
     <div class="container">
         <div class="panel-body">
@@ -26,11 +30,15 @@
                         @endif
                     </div>
                 </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Range for Grab</label>
+                    <div class="col-sm-6">{{ $google_doc->doc_range }}</div>
+                </div>
             </div>
         </div>
 
         <p>Form data from google sheet:</p>
-        <p>Count: {{ count($google_doc->form_data )}}</p>
+        <p>Total count: {{ count($google_doc->form_data )}}</p>
         <table class="table table-striped">
             <thead>
             <tr>
@@ -41,10 +49,11 @@
                 <th>Product File</th>
                 <th>File Type</th>
                 <th>Release</th>
+                <th>Grab Date</th>
             </tr>
             </thead>
             <tbody>
-            @foreach ($google_doc->form_data as $form_d)
+            @foreach ($google_doc->form_data()->orderBy('created_at', 'desc')->limit(10)->get() as $form_d)
                 <tr class="">
                     <td>
                         {{ $form_d->email }}
@@ -67,9 +76,16 @@
                     <td>
                         {{ $form_d->release }}
                     </td>
+                    <td>
+                        {{ $form_d->created_at }}
+                    </td>
                 </tr>
             @endforeach
             </tbody>
         </table>
     </div>
 @endsection
+
+@push('scripts')
+<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.js"></script>
+@endpush
