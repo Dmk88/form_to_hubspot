@@ -13,6 +13,7 @@
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "^5.4.0",
         "laravelrus/sleepingowl": "4.*@dev",
+        "nesbot/carbon": "^1.22",
         "rossjcooper/laravel-hubspot": "^1.0",
         "yajra/laravel-datatables-oracle": "^7.9"
     },

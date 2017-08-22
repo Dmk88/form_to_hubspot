@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\GoogleDoc;
 use App\HubspotForm;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;
 
@@ -12,7 +13,7 @@ class GoogleDocController extends Controller
     public function index(Request $request)
     {
         $google_docs = GoogleDoc::all();
-    
+        
         if ($request->ajax()) {
             return Datatables::of($google_docs)->make(true);
         }
@@ -22,21 +23,20 @@ class GoogleDocController extends Controller
         ]);
     }
     
-    // public function getData(Request $request)
-    // {
-    //     $google_docs = GoogleDoc::all();
-    //
-    //     return Datatables::of($google_docs)->make(true);
-    // }
-    
     public function show(Request $request)
     {
         $google_doc = GoogleDoc::whereId($request->id)->first();
         
+        if ($request->ajax()) {
+            $start = Carbon::createFromFormat('Y-m-d', $request->start_date)->toDateString();
+            $end   = Carbon::createFromFormat('Y-m-d', $request->end_date)->toDateString();
+            
+            return Datatables::of($google_doc->form_data()->whereBetween('created_at', [$start, $end]))->make(true);
+        }
+        
         return view('google_doc', [
             'google_doc' => $google_doc,
         ]);
-        // return Datatables::of($google_doc)->make(true);
     }
     
     public function show_for_edit(Request $request)

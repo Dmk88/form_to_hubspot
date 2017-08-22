@@ -1,13 +1,9 @@
 @extends('layouts.app')
 
-@push('stylesheet')
-<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.15/css/jquery.dataTables.css">
-@endpush
-
 @section('content')
     <div class="container">
         <h2>Google Docs</h2>
-        <table class="table table-bordered" id="users-table">
+        <table class="table table-striped">
             <thead>
             <tr>
                 <th>Name</th>
@@ -19,30 +15,50 @@
                 <th><button type="submit" class="center-block btn btn-default">Grab All</button></th>
                 <th>&nbsp;</th>
             </thead>
+            <tbody>
+            @foreach ($google_docs as $google_doc)
+                <tr>
+                    <td>
+                        {{ $google_doc->doc_name }}
+                    </td>
+                    <td>
+                        {{ $google_doc->doc_id }}
+                    </td>
+                    <td>@if($google_doc->hubspot_form)
+                            {{ $google_doc->hubspot_form->form_name }}
+                        @else
+                            -
+                        @endif
+                    </td>
+                    <td>
+                        <form action="{{ url('google_doc/'. $google_doc->id) }}">
+                            <button type="submit" class="btn btn-success">View</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="{{ url('google_doc/'. $google_doc->id . '/edit/') }}">
+                            <button type="submit" class="btn btn-primary">Edit</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="{{ url('google_doc/'. $google_doc->id) }}" method="post">
+                            {{ csrf_field() }}
+                            {{ method_field('DELETE') }}
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
+                    <td>
+                        <button type="submit" class="btn btn-default">Grab</button>
+                    </td>
+                    <td>
+                        <button type="submit" class="btn btn-default">Push to HS</button>
+                    </td>
+                </tr>
+            @endforeach
+            </tbody>
         </table>
         <form action="{{ url('google_doc') }}" method="get">
             <button type="submit" class="btn btn-default">Add</button>
         </form>
     </div>
 @endsection
-
-
-
-
-@push('scripts')
-<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.js"></script>
-<script>
-    $(function() {
-        $('#users-table').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: '{!! route('datatables') !!}',
-            columns: [
-                { data: 'doc_name' },
-                { data: 'doc_id' },
-                { data: 'doc_range' }
-            ]
-        });
-    });
-</script>
-@endpush
