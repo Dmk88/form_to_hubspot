@@ -13,7 +13,7 @@
                 <th>&nbsp;</th>
                 <th>&nbsp;</th>
                 <th><button type="submit" class="center-block btn btn-default">Grab All</button></th>
-                <th>&nbsp;</th>
+                {{--<th>&nbsp;</th>--}}
             </thead>
             <tbody>
             @foreach ($google_docs as $google_doc)
@@ -48,11 +48,11 @@
                         </form>
                     </td>
                     <td>
-                        <button type="submit" class="btn btn-default">Grab</button>
+                        <button type="submit" class="center-block btn btn-default">Grab</button>
                     </td>
-                    <td>
-                        <button type="submit" class="btn btn-default">Push to HS</button>
-                    </td>
+                    {{--<td>--}}
+                        {{--<button type="submit" class="btn btn-default">Push to HS</button>--}}
+                    {{--</td>--}}
                 </tr>
             @endforeach
             </tbody>

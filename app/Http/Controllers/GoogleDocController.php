@@ -28,10 +28,20 @@ class GoogleDocController extends Controller
         $google_doc = GoogleDoc::whereId($request->id)->first();
         
         if ($request->ajax()) {
-            $start = Carbon::createFromFormat('Y-m-d', $request->start_date)->toDateString();
-            $end   = Carbon::createFromFormat('Y-m-d', $request->end_date)->toDateString();
+            $start  = $request->has('start_date') ? Carbon::createFromFormat('Y-m-d', $request->start_date)->toDateString() : '';
+            $end    = $request->has('end_date') ? Carbon::createFromFormat('Y-m-d', $request->end_date)->toDateString() : '';
+            $result = ($request->has('start_date') && $request->has('end_date')) ?
+                ($google_doc->form_data()->whereBetween('created_at', [$start, $end])) :
+                (($request->has('start_date')) ?
+                    ($google_doc->form_data()->where('created_at', '>', $start)) :
+                    (($request->has('start_date')) ? ($google_doc->form_data()->where('created_at', '<', $end)) : ''));
+            // $google_doc->form_data()->whereBetween('created_at', [$start, $end]);
+            // if ($request->has('start_date')) {
+            //     $start = Carbon::createFromFormat('Y-m-d', $request->start_date)->toDateString();
+            // }
+            // $end = Carbon::createFromFormat('Y-m-d', $request->end_date)->toDateString();
             
-            return Datatables::of($google_doc->form_data()->whereBetween('created_at', [$start, $end]))->make(true);
+            return Datatables::of($result)->make(true);
         }
         
         return view('google_doc', [

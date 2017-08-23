@@ -56,11 +56,4 @@ Route::delete('/hubspot_form/{id}', 'HubspotFormController@delete');
 Route::get('/form_data_from_csv/{id}', 'GrabCsvController@index')->name('form_to_hubspot');
 
 // Route::get('/google_docs',['uses'=>'GoogleDocController@index', 'as' => 'datatables']);
-Route::get('/google_doc/{id}', ['uses'=>'GoogleDocController@show', 'as' => 'google_doc.form_data']);
-
-// Route::post('/datatables', 'DatatablesController', [
-//     'anyData'  => 'datatables.data',
-//     'getIndex' => 'datatables',
-// ]);
-// Route::get('/datatables', 'DatatablesController@anyData')->name('datatables.data');
-// Route::get('/datatables', 'DatatablesController@getIndex')->name('datatables');
+Route::get('/google_doc/{id}', ['uses' => 'GoogleDocController@show', 'as' => 'google_doc.form_data']);
