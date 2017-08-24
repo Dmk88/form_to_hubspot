@@ -55,5 +55,5 @@ Route::delete('/hubspot_form/{id}', 'HubspotFormController@delete');
 
 Route::get('/form_data_from_csv/{id}', 'GrabCsvController@index')->name('form_to_hubspot');
 
-// Route::get('/google_docs',['uses'=>'GoogleDocController@index', 'as' => 'datatables']);
 Route::get('/google_doc/{id}', ['uses' => 'GoogleDocController@show', 'as' => 'google_doc.form_data']);
+Route::get('/exclusion/get_new_exclusion', ['uses' => 'ExclusionController@get_new_exclusion', 'as' => 'exclusion.new_exclusion']);

@@ -1,4 +1,5 @@
 @extends('layouts.app')
+{{--@extends('exclusion.exclusion_add')--}}
 
 @section('content')
     <div class="panel-body">
@@ -44,11 +45,23 @@
                 </div>
             </div>
             <div class="form-group">
-                <div class="col-sm-3"><h3>Exclusion</h3></div>
+                <div class="col-sm-offset-2 col-sm-3"><h3>Exclusion</h3></div>
+            </div>
+            <div class="exclusions">
+                @if($google_doc->exclusions)
+                    @foreach($google_doc->exclusions as $exclusion)
+                        @include('exclusion.exclusion')
+                    @endforeach
+                @endif
             </div>
             <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-6">
-                    <button type="submit" class="btn btn-default">
+                    <button id="add_exclusion" class="btn btn-default">Add New Exclusion</button>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-6">
+                    <button type="submit" class="btn btn-success">
                         <i class="fa fa-plus"></i> Save
                     </button>
                 </div>
@@ -56,3 +69,25 @@
         </form>
     </div>
 @endsection
+
+
+@push('scripts')
+<script>
+    $(function () {
+        $('#add_exclusion').on('click', function (e) {
+            e.preventDefault();
+            $.ajax({
+                type: "GET",
+                url: '{!! route( 'exclusion.new_exclusion') !!}',
+                success: function (data) {
+                    $(".exclusions").append(data);
+                }
+            });
+        });
+        $('.exclusions').on('click', '.delete_exclusion', function (e) {
+            e.preventDefault();
+            $(this).closest('.form-group').remove();
+        });
+    });
+</script>
+@endpush

@@ -18,6 +18,11 @@ class GoogleDoc extends Model
         return $this->hasMany(FormData::class);
     }
     
+    public function exclusions()
+    {
+        return $this->hasMany(Exclusions::class, 'exc_google_doc_id');
+    }
+    
     public function hubspot_form()
     {
         return $this->belongsTo(HubspotForm::class);
