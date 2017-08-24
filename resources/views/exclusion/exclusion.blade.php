@@ -19,7 +19,7 @@
             @if($exclusion_types)
                 @foreach($exclusion_types as $exclusion_type)
                     <option value="{{ $exclusion_type->id }}"
-                            @if($exclusion_type->id == $exclusion_type->type_id)                                                                selected="selected"
+                            @if($exclusion_type->id == $exclusion->exclusion_type_id)                                                                selected="selected"
                             @endif>
                         {{ $exclusion_type->view_name }}
                     </option>
