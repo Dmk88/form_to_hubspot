@@ -17,7 +17,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-3 control-label">Google Doc ID</label>
+                    <label class="col-sm-3 control-label">Google Drive Folder`s ID</label>
                     <div class="col-sm-6">{{ $google_doc->doc_id }}</div>
                 </div>
                 <div class="form-group">
@@ -40,7 +40,7 @@
         <div class="form-inline">
             <div class="input-group" id="datepicker">
                 <span class="input-group-addon">Date Range:</span>
-                {!! Form::input('date', 'start_date', Carbon::now()->format('Y-m-d'), ['class' => 'form-control']) !!}
+                {!! Form::input('date', 'start_date', Carbon::now()->startOfMonth()->format('Y-m-d'), ['class' => 'form-control']) !!}
                 <span class="input-group-addon">to</span>
                 {!! Form::input('date', 'end_date', Carbon::now()->format('Y-m-d'), ['class' => 'form-control']) !!}
             </div>
@@ -73,6 +73,7 @@
         var formTable = $('#form_data-table').DataTable({
             processing: true,
             serverSide: true,
+            lengthMenu: [[25, 50, 100, -1], [25, 50, 100, "All"]],
             ajax: {
                 url: '{!! route( 'google_doc.form_data', [ 'id' => $google_doc->id ]) !!}',
                 data: function (d) {

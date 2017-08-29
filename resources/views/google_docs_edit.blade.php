@@ -15,7 +15,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="doc_id" class="col-sm-3 control-label">Google Doc ID</label>
+                <label for="doc_id" class="col-sm-3 control-label">Google Drive Folder`s ID</label>
 
                 <div class="col-sm-6">
                     <input type="text" name="doc_id" id="doc-id" class="form-control"
@@ -37,7 +37,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="doc_range" class="col-sm-3 control-label">Range</label>
+                <label for="doc_range" class="col-sm-3 control-label">Grab from Line</label>
 
                 <div class="col-sm-6">
                     <input type="text" name="doc_range" id="doc_range" class="form-control"

@@ -7,8 +7,9 @@
             <thead>
             <tr>
                 <th>Name</th>
-                <th>Google Doc ID</th>
+                <th>Google Drive Folder`s ID</th>
                 <th>Hubspot Form</th>
+                <th>Grab from Line</th>
                 <th>&nbsp;</th>
                 <th>&nbsp;</th>
                 <th>&nbsp;</th>
@@ -29,6 +30,9 @@
                         @else
                             -
                         @endif
+                    </td>
+                    <td>
+                        {{ $google_doc->doc_range }}
                     </td>
                     <td>
                         <form action="{{ url('google_doc/'. $google_doc->id) }}">
