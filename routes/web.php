@@ -39,6 +39,7 @@ Route::get('/', function () {
 Route::get('/google_docs', 'GoogleDocController@index')->name('google_docs');
 // Route::get('/google_doc/{id}', 'GoogleDocController@show');
 Route::get('/google_doc/{id}/edit', 'GoogleDocController@show_for_edit');
+Route::get('/google_doc/{id}/grab', 'GoogleDocController@grab');
 Route::post('/google_doc/{id}', 'GoogleDocController@edit');
 Route::post('/google_doc', 'GoogleDocController@add');
 Route::get('/google_doc', 'GoogleDocController@show_add_form');

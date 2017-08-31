@@ -135,4 +135,17 @@ class GoogleDocController extends Controller
         
         return redirect('/google_docs');
     }
+    
+    public function grab(Request $request)
+    {
+        $google_doc = GoogleDoc::whereId($request->id)->first();
+        $google_doc->grab();
+        
+        // dd($google_doc, GoogleDoc::with('form_data')->where('form_data.push_to_hs', '=', 0)->get());
+        // dd($google_doc, $google_doc->form_data_not_push_to_hs());
+        // return view('google_doc', [
+        //     'google_doc' => $google_doc->with('form_data')->where('push_to_hs', '=', 0),
+        // ]);
+        
+    }
 }

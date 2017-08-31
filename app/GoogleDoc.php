@@ -2,6 +2,10 @@
 
 namespace App;
 
+use App\Api\GoogleClient;
+use Google_Service_Drive;
+use HubSpot;
+use App\FormData;
 use Illuminate\Database\Eloquent\Model;
 
 class GoogleDoc extends Model
@@ -18,6 +22,11 @@ class GoogleDoc extends Model
         return $this->hasMany(FormData::class);
     }
     
+    // public function form_data_not_push_to_hs()
+    // {
+    //     return $this->hasMany(FormData::class)->wherePush_to_hs(0);
+    // }
+    
     public function exclusions()
     {
         return $this->hasMany(Exclusions::class, 'exc_google_doc_id');
@@ -25,6 +34,134 @@ class GoogleDoc extends Model
     
     public function hubspot_form()
     {
+        return $this->belongsTo(HubspotForm::class);
+    }
+    
+    public function grab()
+    {
+        if (!$this->doc_id) {
+            exit;
+        }
+        $client  = GoogleClient::get_instance();
+        $service = new Google_Service_Drive($client->client);
+        
+        $optParams = array(
+            'q' => "'$this->doc_id' in parents and trashed=false and mimeType='text/csv'",
+        );
+        $files     = $service->files->listFiles($optParams);
+        foreach ($files as $file) {
+            $response        = $service->files->get($file->id, array('alt' => 'media'));
+            $content         = $response->getBody()->getContents();
+            $lines           = explode(PHP_EOL, $content);
+            $form_data_array = [];
+            foreach ($lines as $line) {
+                $form_data_array[] = str_getcsv($line);
+            }
+            $names = [];
+            foreach ($form_data_array[0] as $key => $field_name){
+                $names[str_replace(' ', '_', strtolower(trim($field_name)))] = $key;
+                // array_push($names, );
+            }
+
+            $this->doc_range = 40;
+            if (empty($form_data_array[$this->doc_range])) {
+                exit;
+            }
+            $form_data_array = array_slice($form_data_array, $this->doc_range);
+            $exclusions_rules = [];
+            foreach ($this->exclusions()->get() as $exclusion){
+                $exclusions_rules[$names[$exclusion->google_doc_field]][] = [
+                    'value' => $exclusion->value,
+                    'type' => $exclusion->exclusions_type()->first()->type,
+                ];
+            }
+            dd($exclusions_rules, $names);
+            foreach ($form_data_array as $key => $form_data){
+                if(!$form_data[0]){
+                    $this->doc_range = $key;
+                    $this->save();
+                    continue;
+                }
+                if($exclusions_rules){
+                    $continue = false;
+                    foreach ($exclusions_rules as $index => $rules){
+                        foreach ($rules as $rule){
+                            $continue = GoogleDoc::checkRule($index, $rule, $form_data);
+                            if($continue){
+                                continue;
+                            }
+                        }
+                        if($continue){
+                            continue;
+                        }
+                    }
+                    if($continue){
+                        continue;
+                    }
+                }
+                
+                if ((strtolower($form_data[9]) !== 'software') || (in_array(strtolower($form_data[3]),
+                        $deny_organizations))
+                ) {
+                    continue;
+                }
+                $form        = [
+                    'email'        => $form_data[0],
+                    'firstname'    => $form_data[1],
+                    'lastname'     => $form_data[2],
+                    'organization' => $form_data[3],
+                    'product_file' => $form_data[7],
+                    'file_type'    => $form_data[9],
+                    'release'      => $form_data[10],
+                    'hs_persona'   => 'persona_8',
+                ];
+                $hubspot_req = HubSpot::forms()->submit($this->hubspot_form()->portal_id, $this->hubspot_form()->form_guid, $form);
+                dd($hubspot_req);
+                FormData::create([
+                    'email'         => $form_data[0],
+                    'first_name'    => $form_data[1],
+                    'last_name'     => $form_data[2],
+                    'organization'  => $form_data[3],
+                    'product_file'  => $form_data[7],
+                    'file_type'     => $form_data[9],
+                    'release'       => $form_data[10],
+                    'google_doc_id' => $this->id,
+                ]);
+                
+            }
+            // dd($this->doc_range, $form_data_array);
+    /*
+            if ((strtolower($form_data[9]) !== 'software') || (in_array(strtolower($form_data[3]),
+                    $deny_organizations))
+            ) {
+                continue;
+            }
+            $form        = [
+                'email'        => $form_data[0],
+                'firstname'    => $form_data[1],
+                'lastname'     => $form_data[2],
+                'organization' => $form_data[3],
+                'product_file' => $form_data[7],
+                'file_type'    => $form_data[9],
+                'release'      => $form_data[10],
+                'hs_persona'   => 'persona_8',
+            ];
+            $hubspot_req = HubSpot::forms()->submit($portal_id, $google_doc_to_form_guid[$id], $form);
+    
+            $form_data = FormData::create([
+                'email'         => $form_data[0],
+                'first_name'    => $form_data[1],
+                'last_name'     => $form_data[2],
+                'organization'  => $form_data[3],
+                'product_file'  => $form_data[7],
+                'file_type'     => $form_data[9],
+                'release'       => $form_data[10],
+                'google_doc_id' => $google_doc_to_form_guid[$id],
+            ]);
+            */
+        }
+        
+        
         return $this->belongsTo(HubspotForm::class);
     }
 }

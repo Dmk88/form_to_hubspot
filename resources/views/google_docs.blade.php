@@ -52,7 +52,9 @@
                         </form>
                     </td>
                     <td>
-                        <button type="submit" class="center-block btn btn-default">Grab</button>
+                        <form action="{{ url('google_doc/'. $google_doc->id . '/grab/') }}">
+                            <button type="submit" class="center-block btn btn-default">Grab</button>
+                        </form>
                     </td>
                     {{--<td>--}}
                         {{--<button type="submit" class="btn btn-default">Push to HS</button>--}}
