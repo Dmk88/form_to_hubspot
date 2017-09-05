@@ -16,6 +16,7 @@ class FormData extends Model
         'file_type',
         'release',
         'google_doc_id',
+        'hs_status_code',
     ];
     
     public function google_doc()

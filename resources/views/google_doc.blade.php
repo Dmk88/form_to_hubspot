@@ -37,12 +37,15 @@
             </div>
         </div>
         <p>Form data from google sheet:</p>
+        @if(!empty($grabCount))
+            <p class="alert-danger">Grab count: {{ $grabCount }}</p>
+        @endif
         <div class="form-inline">
             <div class="input-group" id="datepicker">
                 <span class="input-group-addon">Date Range:</span>
                 {!! Form::input('date', 'start_date', Carbon::now()->startOfMonth()->format('Y-m-d'), ['class' => 'form-control']) !!}
                 <span class="input-group-addon">to</span>
-                {!! Form::input('date', 'end_date', Carbon::now()->format('Y-m-d'), ['class' => 'form-control']) !!}
+                {!! Form::input('date', 'end_date', Carbon::now()->addDays(1)->format('Y-m-d'), ['class' => 'form-control']) !!}
             </div>
             <button type="button" id="dateSearch" class="btn btn-sm btn-primary">Search</button>
         </div>

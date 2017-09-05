@@ -139,8 +139,12 @@ class GoogleDocController extends Controller
     public function grab(Request $request)
     {
         $google_doc = GoogleDoc::whereId($request->id)->first();
-        $google_doc->grab();
+        $grabCount  = $google_doc->grab();
         
+        return view('google_doc', [
+            'google_doc' => $google_doc,
+            'grabCount'  => $grabCount,
+        ]);
         // dd($google_doc, GoogleDoc::with('form_data')->where('form_data.push_to_hs', '=', 0)->get());
         // dd($google_doc, $google_doc->form_data_not_push_to_hs());
         // return view('google_doc', [
