@@ -11,22 +11,7 @@
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
 Auth::routes();
-
-// Route::get('/', 'AuthController@login')->name('home');
-// Route::get('/', function () {
-//     return view('login');
-// });
-
-// Route::options('/auth', function () {
-// });
-
-
-// Route::get('/', 'AuthController@access');
 
 Route::get('/', function () {
     if (empty(Auth::user())) {
@@ -37,7 +22,6 @@ Route::get('/', function () {
 });
 
 Route::get('/google_docs', 'GoogleDocController@index')->name('google_docs');
-// Route::get('/google_doc/{id}', 'GoogleDocController@show');
 Route::get('/google_doc/{id}/edit', 'GoogleDocController@show_for_edit');
 Route::get('/google_doc/{id}/grab', 'GoogleDocController@grab');
 Route::post('/google_doc/{id}', 'GoogleDocController@edit');
@@ -52,9 +36,6 @@ Route::post('/hubspot_form/{id}', 'HubspotFormController@edit');
 Route::post('/hubspot_form', 'HubspotFormController@add');
 Route::get('/hubspot_form', 'HubspotFormController@show_add_form');
 Route::delete('/hubspot_form/{id}', 'HubspotFormController@delete');
-
-
-Route::get('/form_data_from_csv/{id}', 'GrabCsvController@index')->name('form_to_hubspot');
 
 Route::get('/google_doc/{id}', ['uses' => 'GoogleDocController@show', 'as' => 'google_doc.form_data']);
 Route::get('/exclusion/get_new_exclusion', ['uses' => 'ExclusionController@get_new_exclusion', 'as' => 'exclusion.new_exclusion']);
