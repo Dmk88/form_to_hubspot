@@ -43,7 +43,7 @@
         <div class="form-inline">
             <div class="input-group" id="datepicker">
                 <span class="input-group-addon">Date Range:</span>
-                {!! Form::input('date', 'start_date', Carbon::now()->startOfMonth()->format('Y-m-d'), ['class' => 'form-control']) !!}
+                {!! Form::input('date', 'start_date', Carbon::now()->format('Y-m-d'), ['class' => 'form-control']) !!}
                 <span class="input-group-addon">to</span>
                 {!! Form::input('date', 'end_date', Carbon::now()->addDays(1)->format('Y-m-d'), ['class' => 'form-control']) !!}
             </div>
