@@ -98,7 +98,7 @@ class GoogleDoc extends Model
             foreach ($form_data_array as $key => $form_data) {
                 
                 if (!$form_data[0]) {
-                    $this->doc_range = $key + 1;
+                    $this->doc_range += $key;
                     $this->save();
                     continue;
                 }
