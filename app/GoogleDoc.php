@@ -4,12 +4,13 @@ namespace App;
 
 use App\Api\GoogleClient;
 use Google_Service_Drive;
-use HubSpot;
 use Illuminate\Database\Eloquent\Model;
 
 class GoogleDoc extends Model
 {
     public static $RANGE = 'A2:Z';
+    
+    public static $PUSH_TO_HS = ['PUSHED' => 1, 'NOT_PUSHED' => 0];
     
     public function __construct()
     {
@@ -133,29 +134,31 @@ class GoogleDoc extends Model
                 ) {
                     continue;
                 }
-                $form        = [
-                    'email'        => $form_data[0],
-                    'firstname'    => $form_data[1],
-                    'lastname'     => $form_data[2],
-                    'organization' => $form_data[3],
-                    'product_file' => $form_data[7],
-                    'file_type'    => $form_data[9],
-                    'release'      => $form_data[10],
-                    'hs_persona'   => 'persona_8',
+                $form = [
+                    'email'         => $form_data[0],
+                    'firstname'     => $form_data[1],
+                    'lastname'      => $form_data[2],
+                    'organization'  => $form_data[3],
+                    'product_file'  => $form_data[7],
+                    'file_type'     => $form_data[9],
+                    'release'       => $form_data[10],
+                    'download_date' => $form_data[11],
+                    'hs_persona'    => 'persona_8',
                 ];
-                $hubspot_req = HubSpot::forms()->submit($this->hubspot_form()->first()->portal_id,
-                    $this->hubspot_form()->first()->form_guid, $form);
+                // $hubspot_req = HubSpot::forms()->submit($this->hubspot_form()->first()->portal_id,
+                //     $this->hubspot_form()->first()->form_guid, $form);
                 
                 FormData::create([
-                    'email'          => $form_data[0],
-                    'first_name'     => $form_data[1],
-                    'last_name'      => $form_data[2],
-                    'organization'   => $form_data[3],
-                    'product_file'   => $form_data[7],
-                    'file_type'      => $form_data[9],
-                    'release'        => $form_data[10],
-                    'google_doc_id'  => $this->id,
-                    'hs_status_code' => $hubspot_req->getStatusCode(),
+                    'email'         => $form_data[0],
+                    'first_name'    => $form_data[1],
+                    'last_name'     => $form_data[2],
+                    'organization'  => $form_data[3],
+                    'product_file'  => $form_data[7],
+                    'file_type'     => $form_data[9],
+                    'release'       => $form_data[10],
+                    'download_date' => $form_data[11],
+                    'google_doc_id' => $this->id,
+                    // 'hs_status_code' => $hubspot_req->getStatusCode(),
                 ]);
                 $count++;
             }

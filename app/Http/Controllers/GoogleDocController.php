@@ -39,6 +39,7 @@ class GoogleDocController extends Controller
                 [$start, $end])) : (($request->has('start_date')) ? ($google_doc->form_data()->where('created_at', '>',
                 $start)) : (($request->has('start_date')) ? ($google_doc->form_data()->where('created_at', '<',
                 $end)) : ''));
+            $result = ($request->has('grab')) ? $result->wherePush_to_hs($request->grab) : $result;
             // $google_doc->form_data()->whereBetween('created_at', [$start, $end]);
             // if ($request->has('start_date')) {
             //     $start = Carbon::createFromFormat('Y-m-d', $request->start_date)->toDateString();
@@ -50,6 +51,7 @@ class GoogleDocController extends Controller
         
         return view('google_doc', [
             'google_doc' => $google_doc,
+            'flags'      => ['grab' => GoogleDoc::$PUSH_TO_HS['PUSHED']],
         ]);
     }
     
@@ -144,6 +146,7 @@ class GoogleDocController extends Controller
         return view('google_doc', [
             'google_doc' => $google_doc,
             'grabCount'  => $grabCount,
+            'flags'      => ['grab' => GoogleDoc::$PUSH_TO_HS['NOT_PUSHED']],
         ]);
         // dd($google_doc, GoogleDoc::with('form_data')->where('form_data.push_to_hs', '=', 0)->get());
         // dd($google_doc, $google_doc->form_data_not_push_to_hs());

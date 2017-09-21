@@ -5,7 +5,7 @@
 @endpush
 
 @section('content')
-    <div class="container">
+    <div class="container-fluid">
         <div class="panel-body">
             @include('common.errors')
             <div class="form-horizontal">
@@ -54,6 +54,7 @@
             <table class="table table-striped" id="form_data-table">
                 <thead>
                 <tr>
+                    <th>ID</th>
                     <th>Email</th>
                     <th>First Nname</th>
                     <th>Last Name</th>
@@ -61,7 +62,9 @@
                     <th>Product File</th>
                     <th>File Type</th>
                     <th>Release</th>
+                    <th>Download Date</th>
                     <th>Grab Date</th>
+                    <th></th>
                 </tr>
                 </thead>
             </table>
@@ -74,17 +77,20 @@
 <script>
     $(function () {
         var formTable = $('#form_data-table').DataTable({
+            autoWidth: false,
+            responsive: true,
             processing: true,
             serverSide: true,
             lengthMenu: [[25, 50, 100, -1], [25, 50, 100, "All"]],
             ajax: {
-                url: '{!! route( 'google_doc.form_data', [ 'id' => $google_doc->id ]) !!}',
+                url: '{!! route( 'google_doc.form_data', [ 'id' => $google_doc->id, 'grab' => $flags['grab'] ]) !!}',
                 data: function (d) {
                     d.start_date = $('input[name="start_date"]').val();
                     d.end_date = $('input[name="end_date"]').val();
                 }
             },
             columns: [
+                {data: 'id', class: 'id-elem'},
                 {data: 'email'},
                 {data: 'first_name'},
                 {data: 'last_name'},
@@ -92,11 +98,38 @@
                 {data: 'product_file'},
                 {data: 'file_type'},
                 {data: 'release'},
-                {data: 'created_at'}
+                {data: 'download_date'},
+                {data: 'created_at'},
+                {
+                    "orderable": false,
+                    "searchable": false,
+                    "data": null,
+                    "id": 'id',
+                    "defaultContent": '<button class="delete_form_data_row btn btn-danger">Del</button>'
+                }
             ]
         });
         $('#dateSearch').on('click', function () {
             formTable.draw();
+        });
+        formTable.on('click', '.delete_form_data_row', function (e) {
+            e.preventDefault();
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: '/form_data/' + $(this).closest('tr').find('.id-elem').text(),
+                type: 'DELETE',
+                dataType: 'json',
+                data: {method: '_DELETE', submit: true}
+            }).always(function (data) {
+                formTable
+                        .row($(this).parents('tr'))
+                        .remove()
+                        .draw();
+            });
         });
     });
 </script>

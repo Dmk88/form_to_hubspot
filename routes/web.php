@@ -37,5 +37,7 @@ Route::post('/hubspot_form', 'HubspotFormController@add');
 Route::get('/hubspot_form', 'HubspotFormController@show_add_form');
 Route::delete('/hubspot_form/{id}', 'HubspotFormController@delete');
 
+Route::delete('/form_data/{id}', ['uses' => 'FormDataController@delete', 'as' => 'form_data.delete']);
+
 Route::get('/google_doc/{id}', ['uses' => 'GoogleDocController@show', 'as' => 'google_doc.form_data']);
 Route::get('/exclusion/get_new_exclusion', ['uses' => 'ExclusionController@get_new_exclusion', 'as' => 'exclusion.new_exclusion']);

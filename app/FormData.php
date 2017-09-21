@@ -15,6 +15,7 @@ class FormData extends Model
         'product_file',
         'file_type',
         'release',
+        'download_date',
         'google_doc_id',
         'hs_status_code',
     ];
