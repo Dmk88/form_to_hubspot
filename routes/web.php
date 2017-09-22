@@ -37,6 +37,7 @@ Route::post('/hubspot_form', 'HubspotFormController@add');
 Route::get('/hubspot_form', 'HubspotFormController@show_add_form');
 Route::delete('/hubspot_form/{id}', 'HubspotFormController@delete');
 
+Route::post('/form_data/{id}', ['uses' => 'FormDataController@pushToHS', 'as' => 'form_data.pushToHS']);
 Route::delete('/form_data/{id}', ['uses' => 'FormDataController@delete', 'as' => 'form_data.delete']);
 
 Route::get('/google_doc/{id}', ['uses' => 'GoogleDocController@show', 'as' => 'google_doc.form_data']);

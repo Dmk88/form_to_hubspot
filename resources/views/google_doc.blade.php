@@ -69,6 +69,13 @@
                 </thead>
             </table>
         </div>
+        @if(!$flags['grab'])
+            <div class="panel-body">
+                {{ Form::open(array('url' => route( 'form_data.pushToHS', [ 'id' => $google_doc->id ]) )) }}
+                {{ Form::submit('Push To HS', array('class' => 'btn btn-block btn-success')) }}
+                {{ Form::close() }}
+            </div>
+        @endif
     </div>
 @endsection
 

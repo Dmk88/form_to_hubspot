@@ -18,6 +18,7 @@ class FormData extends Model
         'download_date',
         'google_doc_id',
         'hs_status_code',
+        'push_to_hs',
     ];
     
     public function google_doc()

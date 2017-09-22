@@ -40,11 +40,6 @@ class GoogleDocController extends Controller
                 $start)) : (($request->has('start_date')) ? ($google_doc->form_data()->where('created_at', '<',
                 $end)) : ''));
             $result = ($request->has('grab')) ? $result->wherePush_to_hs($request->grab) : $result;
-            // $google_doc->form_data()->whereBetween('created_at', [$start, $end]);
-            // if ($request->has('start_date')) {
-            //     $start = Carbon::createFromFormat('Y-m-d', $request->start_date)->toDateString();
-            // }
-            // $end = Carbon::createFromFormat('Y-m-d', $request->end_date)->toDateString();
             
             return Datatables::of($result)->make(true);
         }

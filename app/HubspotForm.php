@@ -10,4 +10,11 @@ class HubspotForm extends Model
     {
         return $this->hasMany(GoogleDoc::class);
     }
+    
+    public static function pushFormData($portal_id, $form_guid, $form)
+    {
+        $hubspot_req = \HubSpot::forms()->submit($portal_id, $form_guid, $form);
+        
+        return $hubspot_req->getStatusCode();
+    }
 }

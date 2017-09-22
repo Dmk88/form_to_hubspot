@@ -22,11 +22,6 @@ class GoogleDoc extends Model
         return $this->hasMany(FormData::class);
     }
     
-    // public function form_data_not_push_to_hs()
-    // {
-    //     return $this->hasMany(FormData::class)->wherePush_to_hs(0);
-    // }
-    
     public function exclusions()
     {
         return $this->hasMany(Exclusions::class, 'exc_google_doc_id');
@@ -134,17 +129,17 @@ class GoogleDoc extends Model
                 ) {
                     continue;
                 }
-                $form = [
-                    'email'         => $form_data[0],
-                    'firstname'     => $form_data[1],
-                    'lastname'      => $form_data[2],
-                    'organization'  => $form_data[3],
-                    'product_file'  => $form_data[7],
-                    'file_type'     => $form_data[9],
-                    'release'       => $form_data[10],
-                    'download_date' => $form_data[11],
-                    'hs_persona'    => 'persona_8',
-                ];
+                // $form = [
+                //     'email'         => $form_data[0],
+                //     'firstname'     => $form_data[1],
+                //     'lastname'      => $form_data[2],
+                //     'organization'  => $form_data[3],
+                //     'product_file'  => $form_data[7],
+                //     'file_type'     => $form_data[9],
+                //     'release'       => $form_data[10],
+                //     'download_date' => $form_data[11],
+                //     'hs_persona'    => 'persona_8',
+                // ];
                 // $hubspot_req = HubSpot::forms()->submit($this->hubspot_form()->first()->portal_id,
                 //     $this->hubspot_form()->first()->form_guid, $form);
                 
