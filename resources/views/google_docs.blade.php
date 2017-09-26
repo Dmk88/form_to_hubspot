@@ -13,8 +13,11 @@
                 <th>&nbsp;</th>
                 <th>&nbsp;</th>
                 <th>&nbsp;</th>
-                <th><button type="submit" class="center-block btn btn-default">Grab All</button></th>
-                {{--<th>&nbsp;</th>--}}
+                <th>
+                    <form action="{{ url('google_doc/grab_all') }}">
+                        <button type="submit" class="center-block btn btn-default">Grab All</button>
+                    </form>
+                </th>
             </thead>
             <tbody>
             @foreach ($google_docs as $google_doc)
@@ -56,9 +59,6 @@
                             <button type="submit" class="center-block btn btn-default">Grab</button>
                         </form>
                     </td>
-                    {{--<td>--}}
-                        {{--<button type="submit" class="btn btn-default">Push to HS</button>--}}
-                    {{--</td>--}}
                 </tr>
             @endforeach
             </tbody>

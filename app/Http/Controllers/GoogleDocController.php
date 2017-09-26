@@ -29,7 +29,6 @@ class GoogleDocController extends Controller
     public function show(Request $request)
     {
         $google_doc = GoogleDoc::whereId($request->id)->first();
-        
         if ($request->ajax()) {
             $start  = $request->has('start_date') ? Carbon::createFromFormat('Y-m-d',
                 $request->start_date)->toDateString() : '';
@@ -38,9 +37,8 @@ class GoogleDocController extends Controller
             $result = ($request->has('start_date') && $request->has('end_date')) ? ($google_doc->form_data()->whereBetween('created_at',
                 [$start, $end])) : (($request->has('start_date')) ? ($google_doc->form_data()->where('created_at', '>',
                 $start)) : (($request->has('start_date')) ? ($google_doc->form_data()->where('created_at', '<',
-                $end)) : ''));
+                $end)) : $google_doc->form_data()));
             $result = ($request->has('grab')) ? $result->wherePush_to_hs($request->grab) : $result;
-            
             return Datatables::of($result)->make(true);
         }
         
@@ -149,5 +147,20 @@ class GoogleDocController extends Controller
         //     'google_doc' => $google_doc->with('form_data')->where('push_to_hs', '=', 0),
         // ]);
         
+    }
+    
+    public function grabAll(Request $request)
+    {
+        $google_docs = GoogleDoc::all();
+        $grabCount   = 0;
+        foreach ($google_docs as $google_doc) {
+            $grabCount += $google_doc->grab();
+        }
+        
+        return view('google_doc_grab_all', [
+            'google_docs' => $google_docs,
+            'grabCount'   => $grabCount,
+            'flags'       => ['grab' => GoogleDoc::$PUSH_TO_HS['NOT_PUSHED']],
+        ]);
     }
 }
