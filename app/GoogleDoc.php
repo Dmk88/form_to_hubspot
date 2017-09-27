@@ -37,16 +37,16 @@ class GoogleDoc extends Model
         $result = false;
         switch ($rule['type']) {
             case '=':
-                $result = ($data[$index] == $rule['value']);
+                $result = (strtolower(trim($data[$index])) == strtolower(trim($rule['value'])));
                 break;
             case '!=':
-                $result = ($data[$index] != $rule['value']);
+                $result = (strtolower(trim($data[$index])) != strtolower(trim($rule['value'])));
                 break;
             case '>':
-                $result = ($data[$index] > $rule['value']);
+                $result = (strtolower(trim($data[$index])) > strtolower(trim($rule['value'])));
                 break;
             case '<':
-                $result = ($data[$index] < $rule['value']);
+                $result = (strtolower(trim($data[$index])) < strtolower(trim($rule['value'])));
                 break;
         }
         
@@ -58,6 +58,7 @@ class GoogleDoc extends Model
         if (!$this->doc_id) {
             exit;
         }
+        
         $client  = GoogleClient::get_instance();
         $service = new Google_Service_Drive($client->client);
         
@@ -92,57 +93,28 @@ class GoogleDoc extends Model
                 ];
             }
             foreach ($form_data_array as $key => $form_data) {
-                
                 if (!$form_data[0]) {
                     $this->doc_range += $key;
                     $this->save();
                     continue;
                 }
-                // $continue = false;
-                if ((strtolower($form_data[9]) !== 'software') || (in_array(strtolower($form_data[3]),
-                        $deny_organizations))
-                ) {
+                $continue = false;
+                if ($exclusions_rules) {
+                    foreach ($exclusions_rules as $index => $rules) {
+                        if ($continue) {
+                            break;
+                        }
+                        foreach ($rules as $rule) {
+                            if ($continue) {
+                                break;
+                            }
+                            $continue = !GoogleDoc::checkRule($index, $rule, $form_data);
+                        }
+                    }
+                }
+                if ($continue) {
                     continue;
                 }
-                $mas[] = $form_data;
-                // if ($exclusions_rules) {
-                //     foreach ($exclusions_rules as $index => $rules) {
-                //         if ($continue) {
-                //             break;
-                //         }
-                //         foreach ($rules as $rule) {
-                //             $continue = GoogleDoc::checkRule($index, $rule, $form_data);
-                //             $mas222[] = $continue;
-                //             // dd($rule, $continue, $index, $form_data);
-                //             if ($continue) {
-                //                 break;
-                //             }
-                //         }
-                //     }
-                // }
-                // if (!$continue) {
-                //     $mas[] = $form_data;
-                // }
-                
-                if ((strtolower($form_data[9]) !== 'software') || (in_array(strtolower($form_data[3]),
-                        $deny_organizations))
-                ) {
-                    continue;
-                }
-                // $form = [
-                //     'email'         => $form_data[0],
-                //     'firstname'     => $form_data[1],
-                //     'lastname'      => $form_data[2],
-                //     'organization'  => $form_data[3],
-                //     'product_file'  => $form_data[7],
-                //     'file_type'     => $form_data[9],
-                //     'release'       => $form_data[10],
-                //     'download_date' => $form_data[11],
-                //     'hs_persona'    => 'persona_8',
-                // ];
-                // $hubspot_req = HubSpot::forms()->submit($this->hubspot_form()->first()->portal_id,
-                //     $this->hubspot_form()->first()->form_guid, $form);
-                
                 FormData::create([
                     'email'         => $form_data[0],
                     'first_name'    => $form_data[1],
@@ -153,7 +125,6 @@ class GoogleDoc extends Model
                     'release'       => $form_data[10],
                     'download_date' => $form_data[11],
                     'google_doc_id' => $this->id,
-                    // 'hs_status_code' => $hubspot_req->getStatusCode(),
                 ]);
                 $count++;
             }

@@ -39,6 +39,7 @@ class GoogleDocController extends Controller
                 $start)) : (($request->has('start_date')) ? ($google_doc->form_data()->where('created_at', '<',
                 $end)) : $google_doc->form_data()));
             $result = ($request->has('grab')) ? $result->wherePush_to_hs($request->grab) : $result;
+            
             return Datatables::of($result)->make(true);
         }
         
@@ -141,12 +142,6 @@ class GoogleDocController extends Controller
             'grabCount'  => $grabCount,
             'flags'      => ['grab' => GoogleDoc::$PUSH_TO_HS['NOT_PUSHED']],
         ]);
-        // dd($google_doc, GoogleDoc::with('form_data')->where('form_data.push_to_hs', '=', 0)->get());
-        // dd($google_doc, $google_doc->form_data_not_push_to_hs());
-        // return view('google_doc', [
-        //     'google_doc' => $google_doc->with('form_data')->where('push_to_hs', '=', 0),
-        // ]);
-        
     }
     
     public function grabAll(Request $request)

@@ -44,5 +44,33 @@ class FormDataController extends Controller
         return redirect('/google_docs');
     }
     
+    public function pushToHSAll(Request $request)
+    {
+        $google_docs = GoogleDoc::all();
+        foreach ($google_docs as $google_doc) {
+            foreach ($google_doc->form_data()->wherePush_to_hs(GoogleDoc::$PUSH_TO_HS['NOT_PUSHED'])->get() as $form_data) {
+                $form         = [
+                    'email'         => $form_data->email,
+                    'firstname'     => $form_data->first_name,
+                    'lastname'      => $form_data->last_name,
+                    'organization'  => $form_data->organization,
+                    'product_file'  => $form_data->product_file,
+                    'file_type'     => $form_data->file_type,
+                    'release'       => $form_data->release,
+                    'download_date' => $form_data->download_date,
+                    'hs_persona'    => 'persona_8',
+                ];
+                $hubspot_form = $google_doc->hubspot_form()->first();
+                $hubspot_req  = HubspotForm::pushFormData($hubspot_form->portal_id, $hubspot_form->form_guid, $form);
+                
+                $form_data->hs_status_code = $hubspot_req;
+                $form_data->push_to_hs     = GoogleDoc::$PUSH_TO_HS['PUSHED'];
+                $form_data->save();
+            }
+        }
+        
+        return redirect('/google_docs');
+    }
+    
     
 }

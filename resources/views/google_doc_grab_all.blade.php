@@ -64,7 +64,7 @@
     @endforeach
 
     <div class="panel-body">
-        {{ Form::open(array('url' => '/form_data/push_all')) }}
+        {{ Form::open(array('url' => '/form_data/push_all', 'method' => 'GET')) }}
         {{ Form::submit('Push To HS', array('class' => 'btn btn-block btn-success')) }}
         {{ Form::close() }}
     </div>
@@ -75,10 +75,11 @@
 <script>
     $(function () {
         $('.data-table').on('click', '.delete_form_data_row', function (e) {
+            var table = $(this).closest('table').DataTable();
             e.preventDefault();
             $.ajaxSetup({
                 headers: {
-                    'X-CSRF-TOKEN': $(this).find('meta[name="csrf-token"]').attr('content')
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
             $.ajax({
@@ -87,7 +88,7 @@
                 dataType: 'json',
                 data: {method: '_DELETE', submit: true}
             }).always(function (data) {
-                $(this)
+                table
                         .row($(this).parents('tr'))
                         .remove()
                         .draw();
